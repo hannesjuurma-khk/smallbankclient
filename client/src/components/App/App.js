@@ -13,10 +13,12 @@ class App extends React.Component {
       isLoading: true,
       userCreated: false,
       readyForLogin: false,
-      apiResponse: []
+      apiResponse: [],
+      userLoggedOut: false,
     }
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   };
 
   componentDidMount(){
@@ -30,7 +32,14 @@ class App extends React.Component {
 
   handleLoginSubmit(e) {
     this.setState({
+      userLoggedOut: false,
       readyForLogin: true
+    })
+  }
+
+  handleLogout(e) {
+    this.setState({
+      userLoggedOut: true
     })
   }
 
@@ -57,7 +66,11 @@ class App extends React.Component {
           {this.state.userCreated ? <Redirect to='/login' /> : ""}
         </Route>
 
-        <Route exact path='/dashboard' component={Dashboard}></Route>
+        <Route exact path='/dashboard' render={(props) => (
+          <Dashboard {...props} handleLogout={this.handleLogout} />
+        )}>
+          {this.state.userLoggedOut ? <Redirect to='/login' /> : ""}
+        </Route>
         </Switch>
       </BrowserRouter>
     )

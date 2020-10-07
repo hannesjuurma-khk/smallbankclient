@@ -77,8 +77,7 @@ export default class RegisterForm extends React.Component {
       headers: { 'Content-Type': 'application/json' }
       })
       .then(res => res.json)
-      .then(() => console.log("fetched")
-      ).then(
+      .then(
         this.props.handleRegisterSubmit
       )
 

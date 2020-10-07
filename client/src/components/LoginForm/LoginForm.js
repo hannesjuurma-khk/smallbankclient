@@ -56,7 +56,6 @@ export default class LoginForm extends React.Component {
       "email": email,
       "password": password,
     }
-    console.log(bodyData);
 
     fetch("https://smallbank-api.herokuapp.com/sessions", {
       method: 'post',
@@ -75,6 +74,7 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
+
     return (
       <div className="w-100 mb-4">
         <Title className="text-center mb-3" title="Small Bank API"/>
